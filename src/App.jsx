@@ -5,6 +5,11 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import "./App.css";
+import ProductForm from "./components/ProductForm";
+import BillingForm from "./components/BillingForm";
+import FeeForm from "./components/FeeForm";
+import JobForm from "./components/JobForm";
+import AttachmentForm from "./components/AttachmentForm";
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -67,14 +72,12 @@ export default function BasicTabs() {
 
     const errors = {};
 
-
     if (!formData.ownerRep.trim())
       errors.ownerRep = "Owner Representative is required.";
     if (!formData.address1.trim())
       errors.address1 = "Address Line 1 is required.";
     if (!formData.city.trim()) errors.city = "City is required.";
 
-    
     if (formData.email.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
@@ -188,12 +191,11 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One
+        <ProductForm />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        <div id="container-1">
+        <div className="container-1">
           <div className="form-wrapper">
-            
             <div className="row-1">
               <form onSubmit={handleFormSubmit}>
                 <h3>Owner Representative</h3>
@@ -293,7 +295,6 @@ export default function BasicTabs() {
               </form>
             </div>
 
- 
             <div className="row-2">
               <form onSubmit={handleArchitectSubmit}>
                 <h3>Architect Details</h3>
@@ -348,7 +349,6 @@ export default function BasicTabs() {
                   )}
                 </div>
 
-               
                 <div className="row-inline">
                   <div>
                     <label>
@@ -450,16 +450,19 @@ export default function BasicTabs() {
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <BillingForm />
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={3}>
-        Item Four
+        <FeeForm />
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={4}>
-        Item Five
+        <JobForm />
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={5}>
-        Item Six
+        <AttachmentForm />
       </CustomTabPanel>
     </Box>
   );
