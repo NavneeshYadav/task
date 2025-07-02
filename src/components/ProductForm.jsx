@@ -47,7 +47,7 @@ function ProductForm() {
             <TextField
               fullWidth
               size="small"
-              placeholder="Field 1"
+              placeholder="Enter project name"
               variant="outlined"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
@@ -63,7 +63,7 @@ function ProductForm() {
             <TextField
               fullWidth
               size="small"
-              placeholder="Field 2"
+              placeholder="Enter client name"
               variant="outlined"
               value={clientName}
               onChange={(e) => setClientName(e.target.value)}
