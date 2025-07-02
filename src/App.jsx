@@ -74,7 +74,7 @@ export default function BasicTabs() {
       errors.address1 = "Address Line 1 is required.";
     if (!formData.city.trim()) errors.city = "City is required.";
 
-    // Email format check (if email is entered)
+    
     if (formData.email.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
