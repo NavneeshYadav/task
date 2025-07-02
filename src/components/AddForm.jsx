@@ -1,7 +1,15 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Paper,
+  MenuItem,
+  Grid,
+} from "@mui/material";
 
 function AddForm() {
-
   const [formData, setFormData] = useState({
     ownerRep: "",
     email: "",
@@ -12,48 +20,11 @@ function AddForm() {
   });
 
   const [formErrors, setFormErrors] = useState({});
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-
-    const errors = {};
-
-    if (!formData.ownerRep.trim())
-      errors.ownerRep = "Owner Representative is required.";
-    if (!formData.address1.trim())
-      errors.address1 = "Address Line 1 is required.";
-    if (!formData.city.trim()) errors.city = "City is required.";
-
-    if (formData.email.trim()) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(formData.email)) {
-        errors.email = "Invalid email format.";
-      }
-    }
-
-    setFormErrors(errors);
-
-    if (Object.keys(errors).length === 0) {
-      alert("Form submitted successfully!");
-      setFormData({
-        ownerRep: "",
-        email: "",
-        address1: "",
-        address2: "",
-        city: "",
-        state: "",
-      });
-    }
-  };
   const [architectForm, setArchitectForm] = useState({
     ownerRep: "",
     email: "",
     mailingName1: "",
-    countryCode: "",
     phone: "",
     address1: "",
     address2: "",
@@ -62,39 +33,44 @@ function AddForm() {
   });
 
   const [architectErrors, setArchitectErrors] = useState({});
-  const handleArchitectChange = (e) => {
+
+  const handleInputChange = (e, setFn) => {
     const { name, value } = e.target;
-    setArchitectForm((prev) => ({ ...prev, [name]: value }));
+    setFn((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleArchitectSubmit = (e) => {
-    e.preventDefault();
+  const validateForm = (data, type) => {
     const errors = {};
-
-    if (!architectForm.ownerRep.trim())
+    if (!data.ownerRep.trim())
       errors.ownerRep = "Owner Representative is required.";
-    if (!architectForm.email.trim()) {
-      errors.email = "Email is required.";
-    } else {
+    if (!data.address1.trim()) errors.address1 = "Address Line 1 is required.";
+    if (!data.city.trim()) errors.city = "City is required.";
+
+    if (data.email?.trim()) {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(architectForm.email))
-        errors.email = "Invalid email format.";
+      if (!emailRegex.test(data.email)) errors.email = "Invalid email format.";
     }
 
-    if (!architectForm.mailingName1.trim())
-      errors.mailingName1 = "Mailing Name is required.";
-    if (!architectForm.countryCode.trim())
-      errors.countryCode = "Country code is required.";
-    if (!architectForm.phone.trim()) errors.phone = "Phone number is required.";
-    if (!architectForm.address1.trim())
-      errors.address1 = "Address Line 1 is required.";
-    if (!architectForm.city.trim()) errors.city = "City is required.";
+    if (type === "architect") {
+      if (!data.mailingName1.trim())
+        errors.mailingName1 = "Mailing Name is required.";
+      if (!data.phone.trim()) errors.phone = "Phone number is required.";
+    }
 
-    setArchitectErrors(errors);
+    return errors;
+  };
 
+  const handleSubmit = (e, data, setErrorFn, resetFn, type) => {
+    e.preventDefault();
+    const errors = validateForm(data, type);
+    setErrorFn(errors);
     if (Object.keys(errors).length === 0) {
-      alert("Architect form submitted successfully!");
-      setArchitectForm({
+      alert(
+        `${
+          type === "architect" ? "Architect" : "Owner Rep"
+        } form submitted successfully!`
+      );
+      resetFn({
         ownerRep: "",
         email: "",
         mailingName1: "",
@@ -108,256 +84,281 @@ function AddForm() {
     }
   };
 
+  const renderLabel = (text, required = false) => (
+    <Typography sx={{ mb: 0.5, fontWeight: 500 }}>
+      {text} {required && <span style={{ color: "red" }}>*</span>}
+    </Typography>
+  );
+
   return (
-    <div className="container-1">
-      <div className="form-wrapper">
-        <div className="row-1">
-          <form onSubmit={handleFormSubmit}>
-            <h3>Owner Representative</h3>
+    <Box
+      sx={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "start",
+        p: 2,
+      }}
+    >
+      <Box sx={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+        {/* Owner Rep Form */}
+        <Paper
+          elevation={3}
+          sx={{ width: 450, p: 3, borderRadius: 2, backgroundColor: "#f9f9f9" }}
+        >
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Owner Representative
+          </Typography>
 
-            <div>
-              <label>
-                Owner Representative <span className="required">*</span>
-              </label>
-              <select
-                name="ownerRep"
-                value={formData.ownerRep}
-                onChange={handleInputChange}
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Owner Representative", true)}
+            <TextField
+              fullWidth
+              select
+              size="small"
+              name="ownerRep"
+              value={formData.ownerRep}
+              onChange={(e) => handleInputChange(e, setFormData)}
+              error={!!formErrors.ownerRep}
+              helperText={formErrors.ownerRep}
+            >
+              <MenuItem value="">Select Representative</MenuItem>
+              <MenuItem value="rep1">John Doe</MenuItem>
+              <MenuItem value="rep2">Jane Smith</MenuItem>
+            </TextField>
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Email")}
+            <TextField
+              fullWidth
+              size="small"
+              name="email"
+              value={formData.email}
+              onChange={(e) => handleInputChange(e, setFormData)}
+              error={!!formErrors.email}
+              helperText={formErrors.email}
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Address Line 1", true)}
+            <TextField
+              fullWidth
+              size="small"
+              name="address1"
+              value={formData.address1}
+              onChange={(e) => handleInputChange(e, setFormData)}
+              error={!!formErrors.address1}
+              helperText={formErrors.address1}
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Address Line 2")}
+            <TextField
+              fullWidth
+              size="small"
+              name="address2"
+              value={formData.address2}
+              onChange={(e) => handleInputChange(e, setFormData)}
+            />
+          </Box>
+
+          <Grid container spacing={2} sx={{ mb: 2 }}>
+            <Grid item xs={6} sx={{ width: 190 }}>
+              {renderLabel("City", true)}
+              <TextField
+                select
+                fullWidth
+                size="small"
+                name="city"
+                value={formData.city}
+                onChange={(e) => handleInputChange(e, setFormData)}
+                error={!!formErrors.city}
+                helperText={formErrors.city}
               >
-                <option value="">Select Representative</option>
-                <option value="rep1">John Doe</option>
-                <option value="rep2">Jane Smith</option>
-              </select>
-              {formErrors.ownerRep && (
-                <p className="error">{formErrors.ownerRep}</p>
-              )}
-            </div>
-
-            <div>
-              <label>Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                placeholder="Enter email"
-              />
-              {formErrors.email && <p className="error">{formErrors.email}</p>}
-            </div>
-
-            <div>
-              <label>
-                Address Line 1 <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                name="address1"
-                value={formData.address1}
-                onChange={handleInputChange}
-                placeholder="Enter address line 1"
-              />
-              {formErrors.address1 && (
-                <p className="error">{formErrors.address1}</p>
-              )}
-            </div>
-
-            <div>
-              <label>Address Line 2</label>
-              <input
-                type="text"
-                name="address2"
-                value={formData.address2}
-                onChange={handleInputChange}
-                placeholder="Enter address line 2"
-              />
-            </div>
-
-            <div className="row-inline">
-              <div>
-                <label>
-                  City <span className="required">*</span>
-                </label>
-                <select
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select City</option>
-                  <option value="bhopal">Bhopal</option>
-                  <option value="indore">Indore</option>
-                </select>
-                {formErrors.city && <p className="error">{formErrors.city}</p>}
-              </div>
-              <div>
-                <label>State</label>
-                <select
-                  name="state"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                >
-                  <option value="">Select State</option>
-                  <option value="mp">Madhya Pradesh</option>
-                  <option value="cg">Chhattisgarh</option>
-                </select>
-              </div>
-            </div>
-
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-
-        <div className="row-2">
-          <form onSubmit={handleArchitectSubmit}>
-            <h3>Architect Details</h3>
-
-            <div>
-              <label>
-                Owner Representative <span className="required">*</span>
-              </label>
-              <select
-                name="ownerRep"
-                value={architectForm.ownerRep}
-                onChange={handleArchitectChange}
+                <MenuItem value="">Select City</MenuItem>
+                <MenuItem value="bhopal">Bhopal</MenuItem>
+                <MenuItem value="indore">Indore</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid item xs={6} sx={{ width: 190 }}>
+              {renderLabel("State")}
+              <TextField
+                select
+                fullWidth
+                size="small"
+                name="state"
+                value={formData.state}
+                onChange={(e) => handleInputChange(e, setFormData)}
               >
-                <option value="">Select Representative</option>
-                <option value="rep1">John Doe</option>
-                <option value="rep2">Jane Smith</option>
-              </select>
-              {architectErrors.ownerRep && (
-                <p className="error">{architectErrors.ownerRep}</p>
-              )}
-            </div>
+                <MenuItem value="">Select State</MenuItem>
+                <MenuItem value="mp">Madhya Pradesh</MenuItem>
+                <MenuItem value="cg">Chhattisgarh</MenuItem>
+              </TextField>
+            </Grid>
+          </Grid>
 
-            <div>
-              <label>
-                Email Address <span className="required">*</span>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={architectForm.email}
-                onChange={handleArchitectChange}
-                placeholder="Enter email"
-              />
-              {architectErrors.email && (
-                <p className="error">{architectErrors.email}</p>
-              )}
-            </div>
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={(e) =>
+              handleSubmit(e, formData, setFormErrors, setFormData, "owner")
+            }
+          >
+            Submit
+          </Button>
+        </Paper>
 
-            <div>
-              <label>
-                Mailing Name 1 <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                name="mailingName1"
-                value={architectForm.mailingName1}
-                onChange={handleArchitectChange}
-                placeholder="Enter mailing name"
-              />
-              {architectErrors.mailingName1 && (
-                <p className="error">{architectErrors.mailingName1}</p>
-              )}
-            </div>
+        {/* Architect Form */}
+        <Paper
+          elevation={3}
+          sx={{ width: 450, p: 3, borderRadius: 2, backgroundColor: "#f9f9f9" }}
+        >
+          <Typography variant="h5" sx={{ mb: 2 }}>
+            Architect Details
+          </Typography>
 
-            <div className="row-inline">
-              <div>
-                <label>
-                  Country Code <span className="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="countryCode"
-                  value={architectForm.countryCode}
-                  onChange={handleArchitectChange}
-                  placeholder="+91"
-                />
-                {architectErrors.countryCode && (
-                  <p className="error">{architectErrors.countryCode}</p>
-                )}
-              </div>
-              <div>
-                <label>
-                  Phone No. <span className="required">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="phone"
-                  value={architectForm.phone}
-                  onChange={handleArchitectChange}
-                  placeholder="1234567890"
-                />
-                {architectErrors.phone && (
-                  <p className="error">{architectErrors.phone}</p>
-                )}
-              </div>
-            </div>
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Owner Representative", true)}
+            <TextField
+              fullWidth
+              select
+              size="small"
+              name="ownerRep"
+              value={architectForm.ownerRep}
+              onChange={(e) => handleInputChange(e, setArchitectForm)}
+              error={!!architectErrors.ownerRep}
+              helperText={architectErrors.ownerRep}
+            >
+              <MenuItem value="">Select Representative</MenuItem>
+              <MenuItem value="rep1">John Doe</MenuItem>
+              <MenuItem value="rep2">Jane Smith</MenuItem>
+            </TextField>
+          </Box>
 
-            <div>
-              <label>
-                Address Line 1 <span className="required">*</span>
-              </label>
-              <input
-                type="text"
-                name="address1"
-                value={architectForm.address1}
-                onChange={handleArchitectChange}
-                placeholder="Enter address line 1"
-              />
-              {architectErrors.address1 && (
-                <p className="error">{architectErrors.address1}</p>
-              )}
-            </div>
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Email", true)}
+            <TextField
+              fullWidth
+              size="small"
+              name="email"
+              value={architectForm.email}
+              onChange={(e) => handleInputChange(e, setArchitectForm)}
+              error={!!architectErrors.email}
+              helperText={architectErrors.email}
+            />
+          </Box>
 
-            <div>
-              <label>Address Line 2</label>
-              <input
-                type="text"
-                name="address2"
-                value={architectForm.address2}
-                onChange={handleArchitectChange}
-                placeholder="Enter address line 2"
-              />
-            </div>
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Mailing Name", true)}
+            <TextField
+              fullWidth
+              size="small"
+              name="mailingName1"
+              value={architectForm.mailingName1}
+              onChange={(e) => handleInputChange(e, setArchitectForm)}
+              error={!!architectErrors.mailingName1}
+              helperText={architectErrors.mailingName1}
+            />
+          </Box>
 
-            <div className="row-inline">
-              <div>
-                <label>
-                  City <span className="required">*</span>
-                </label>
-                <select
-                  name="city"
-                  value={architectForm.city}
-                  onChange={handleArchitectChange}
-                >
-                  <option value="">Select City</option>
-                  <option value="bhopal">Bhopal</option>
-                  <option value="indore">Indore</option>
-                </select>
-                {architectErrors.city && (
-                  <p className="error">{architectErrors.city}</p>
-                )}
-              </div>
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Phone", true)}
+            <TextField
+              fullWidth
+              size="small"
+              name="phone"
+              value={architectForm.phone}
+              onChange={(e) => handleInputChange(e, setArchitectForm)}
+              error={!!architectErrors.phone}
+              helperText={architectErrors.phone}
+            />
+          </Box>
 
-              <div>
-                <label>State</label>
-                <select
-                  name="state"
-                  value={architectForm.state}
-                  onChange={handleArchitectChange}
-                >
-                  <option value="">Select State</option>
-                  <option value="mp">Madhya Pradesh</option>
-                  <option value="cg">Chhattisgarh</option>
-                </select>
-              </div>
-            </div>
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Address Line 1", true)}
+            <TextField
+              fullWidth
+              size="small"
+              name="address1"
+              value={architectForm.address1}
+              onChange={(e) => handleInputChange(e, setArchitectForm)}
+              error={!!architectErrors.address1}
+              helperText={architectErrors.address1}
+            />
+          </Box>
 
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
+          <Box sx={{ mb: 2 }}>
+            {renderLabel("Address Line 2")}
+            <TextField
+              fullWidth
+              size="small"
+              name="address2"
+              value={architectForm.address2}
+              onChange={(e) => handleInputChange(e, setArchitectForm)}
+            />
+          </Box>
+
+          <Grid
+            container
+            spacing={2}
+            sx={{ mb: 2, justifyContent: "space-between" }}
+          >
+            <Grid item xs={6} sx={{ width: 190 }}>
+              {renderLabel("City", true)}
+              <TextField
+                select
+                fullWidth
+                size="small"
+                name="city"
+                value={architectForm.city}
+                onChange={(e) => handleInputChange(e, setArchitectForm)}
+                error={!!architectErrors.city}
+                helperText={architectErrors.city}
+              >
+                <MenuItem value="">Select City</MenuItem>
+                <MenuItem value="bhopal">Bhopal</MenuItem>
+                <MenuItem value="indore">Indore</MenuItem>
+              </TextField>
+            </Grid>
+            <Grid item xs={6} sx={{ width: 190 }}>
+              {renderLabel("State")}
+              <TextField
+                select
+                fullWidth
+                size="small"
+                name="state"
+                value={architectForm.state}
+                onChange={(e) => handleInputChange(e, setArchitectForm)}
+              >
+                <MenuItem value="">Select State</MenuItem>
+                <MenuItem value="mp">Madhya Pradesh</MenuItem>
+                <MenuItem value="cg">Chhattisgarh</MenuItem>
+              </TextField>
+            </Grid>
+          </Grid>
+
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={(e) =>
+              handleSubmit(
+                e,
+                architectForm,
+                setArchitectErrors,
+                setArchitectForm,
+                "architect"
+              )
+            }
+          >
+            Submit
+          </Button>
+        </Paper>
+      </Box>
+    </Box>
   );
 }
 

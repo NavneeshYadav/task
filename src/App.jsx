@@ -64,6 +64,8 @@ export default function BasicTabs() {
         <Tabs
           value={value}
           onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
           aria-label="basic tabs example"
           sx={{
             bgcolor: "#ebebeb",
