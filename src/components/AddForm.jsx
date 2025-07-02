@@ -50,6 +50,10 @@ function AddForm() {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(data.email)) errors.email = "Invalid email format.";
     }
+    if(data.phone?.trim()) {
+      const phoneRegex = /^\d{10}$/; // Assuming 10-digit phone number  
+        if (!phoneRegex.test(data.phone)) errors.phone = "Invalid phone number.";   
+    }
 
     if (type === "architect") {
       if (!data.mailingName1.trim())
@@ -115,8 +119,8 @@ function AddForm() {
                 helperText={formErrors.ownerRep}
               >
                 <MenuItem value="">Select Representative</MenuItem>
-                <MenuItem value="rep1">John Doe</MenuItem>
-                <MenuItem value="rep2">Jane Smith</MenuItem>
+                <MenuItem value="rep1">Representative 1</MenuItem>
+                <MenuItem value="rep2">Representative 2</MenuItem>
               </TextField>
             </Box>
 
@@ -227,8 +231,8 @@ function AddForm() {
                 helperText={architectErrors.ownerRep}
               >
                 <MenuItem value="">Select Representative</MenuItem>
-                <MenuItem value="rep1">John Doe</MenuItem>
-                <MenuItem value="rep2">Jane Smith</MenuItem>
+                <MenuItem value="rep1">Representative 1</MenuItem>
+                <MenuItem value="rep2">Representative 2</MenuItem>
               </TextField>
             </Box>
 
