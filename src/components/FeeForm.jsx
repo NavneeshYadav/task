@@ -6,13 +6,14 @@ import {
   FormControlLabel,
   Checkbox,
   Grid,
+  Button,
+  Stack,
 } from "@mui/material";
-
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 function FeeForm() {
   const boxStyle = {
     p: 3,
-    backgroundColor: "#f9f9f9",
-    borderRadius: 2,
     height: "100%",
   };
 
@@ -28,7 +29,7 @@ function FeeForm() {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "100vh", p: 2 }}>
+    <Box sx={{ width: "100%", height: "100%", p: 2 }}>
       <Grid container spacing={2}>
         {/* Box 1 */}
         <Grid
@@ -175,6 +176,38 @@ function FeeForm() {
           </Grid>
         </Grid>
       </Grid>
+
+      {/* Info and Buttons Section */}
+      <Box
+        sx={{
+          mt: 4,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          backgroundColor: "#ebebeb",
+          p: 3,
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+          <InfoOutlinedIcon color="primary" sx={{ mr: 1 }} />
+          <Typography variant="body1">
+            Fee Exclusions can be editable by Project Accountant
+          </Typography>
+        </Box>
+
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={2}
+          sx={{ width: "100%", justifyContent: { sm: "flex-end" }, mt: 2 }}
+        >
+          <Button variant="outlined" color="primary" sx={{ border: "2px solid #1976d2" }}>
+            Save
+          </Button>
+          <Button variant="contained" color="primary">
+            Next <ArrowRightAltIcon sx={{ ml: 1 }} />
+          </Button>
+        </Stack>
+      </Box>
     </Box>
   );
 }
