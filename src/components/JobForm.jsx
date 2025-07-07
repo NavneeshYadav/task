@@ -9,7 +9,8 @@ import {
   Grid,
   MenuItem,
 } from "@mui/material";
-
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -189,50 +190,117 @@ function JobForm() {
           sm={6}
           md={4}
           lg={3}
-          sx={{ width: { xs: "100%", md: "30%" } }}
+          sx={{ width: { xs: "100%", md: "100%" } }}
         >
           <Box sx={{ mb: 2 }}>
             <Box sx={{ mb: 2 }}>
               <Typography variant="h5" sx={{ mb: 2, fontWeight: 550 }}>
-                Project Manager
+                Tax Information
               </Typography>
             </Box>
             <Typography variant="h6" sx={{ mb: 2, fontWeight: 550 }}>
               Sales Tax/Additional Fee
             </Typography>
             <Box sx={{ mb: 2 }}>
-              <FormControl>
-                <FormLabel id="demo-row-radio-buttons-group-label">
-                  Gender
-                </FormLabel>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                >
-                  <FormControlLabel
-                    value="female"
-                    control={<Radio />}
-                    label="Female"
-                  />
-                  <FormControlLabel
-                    value="male"
-                    control={<Radio />}
-                    label="Male"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                  />
-                  <FormControlLabel
-                    value="disabled"
-                    disabled
-                    control={<Radio />}
-                    label="other"
-                  />
-                </RadioGroup>
-              </FormControl>
+              <Grid container spacing={2} sx={{ alignItems: "center" }}>
+                <Grid item xs={12}>
+                  <FormControl>
+                    <FormLabel id="demo-row-radio-buttons-group-label">
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Typography
+                          sx={{ mb: 0.5, fontWeight: 550, color: "black" }}
+                        >
+                          Sales Tax Exempt
+                        </Typography>
+                        <HelpOutlineIcon fontSize="small" sx={{ ml: 1 }} />
+                      </Box>
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                    >
+                      <FormControlLabel
+                        value="yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="no"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="outlined"
+                    endIcon={
+                      <AttachFileIcon
+                        sx={{
+                          transform: "rotate(45deg)",
+                        }}
+                      />
+                    }
+                    sx={{
+                      textTransform: "none",
+                      borderRadius: 2,
+                    }}
+                  >
+                    Add Attachment
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2} sx={{ alignItems: "center" }}>
+                <Grid item xs={12}>
+                  <FormControl>
+                    <FormLabel id="demo-row-radio-buttons-group-label">
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Typography
+                          sx={{ mb: 0.5, fontWeight: 550, color: "black" }}
+                        >
+                          Certificate of Capital Improvement
+                        </Typography>
+                      </Box>
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                    >
+                      <FormControlLabel
+                        value="yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="no"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="outlined"
+                    endIcon={
+                      <AttachFileIcon
+                        sx={{
+                          transform: "rotate(45deg)",
+                        }}
+                      />
+                    }
+                    sx={{
+                      textTransform: "none",
+                      borderRadius: 2,
+                    }}
+                  >
+                    Add Attachment
+                  </Button>
+                </Grid>
+              </Grid>
             </Box>
           </Box>
         </Grid>
