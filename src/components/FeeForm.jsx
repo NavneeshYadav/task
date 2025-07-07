@@ -29,7 +29,7 @@ function FeeForm() {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "100%", p: 2 }}>
+    <Box sx={{ width: "100%", height: "100%", p: 1 }}>
       <Grid container spacing={2}>
         {/* Box 1 */}
         <Grid
