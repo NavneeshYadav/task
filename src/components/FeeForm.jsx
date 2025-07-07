@@ -1,64 +1,180 @@
 import React from "react";
-import { useState } from "react";
-import { Box, Typography, TextField, Button, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+} from "@mui/material";
 
 function FeeForm() {
-  const [reason, setReason] = useState("");
-  const [notes, setNotes] = useState("");
-  const [errors, setErrors] = useState({});
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newErrors = {};
-    if (!reason) newErrors.reason = "Reason is required";
-    if (!notes) newErrors.notes = "Notes are required";
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Submitted:", { reason, notes });
-    }
+  const boxStyle = {
+    p: 3,
+    backgroundColor: "#f9f9f9",
+    borderRadius: 2,
+    height: "100%",
   };
+
+  const formGroupStyle = {
+    border: "1px solid #ccc",
+    pt: 2,
+    pb: 2,
+    pl: 3,
+  };
+
+  const checkStyle = {
+    borderBottom: "1px solid #ccc",
+  };
+
   return (
-    <Box sx={{ p: 2, display: "flex", justifyContent: "center" }}>
-      <Paper
-        sx={{ width: 300, p: 3, borderRadius: 2, backgroundColor: "#f9f9f9" }}
-        elevation={3}
-      >
-        <Typography variant="h5" sx={{ mb: 2 }}>
-          Fee Exclusion
-        </Typography>
+    <Box sx={{ width: "100%", height: "100vh", p: 2 }}>
+      <Grid container spacing={2}>
+        {/* Box 1 */}
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          sx={{ width: { xs: "100%", md: "30%" } }}
+        >
+          <Box sx={boxStyle}>
+            <Typography variant="h5" sx={{ mb: 2 }}>
+              Exclude the Quoted Fees
+            </Typography>
+            <FormGroup sx={formGroupStyle}>
+              {[
+                "General Requirements",
+                "Pre Constitution",
+                "General Conditions",
+                "Contigency",
+                "Insurance",
+                "Retails Sales Tax",
+                "P & P Bond",
+                "Builders Risk",
+              ].map((label, i) => (
+                <FormControlLabel
+                  key={label}
+                  sx={i < 7 ? checkStyle : {}}
+                  control={<Checkbox />}
+                  label={label}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+        </Grid>
 
-        <Box sx={{ mb: 2 }}>
-          <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Reason</Typography>
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Enter reason"
-            variant="outlined"
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            error={!!errors.reason}
-            helperText={errors.reason}
-          />
-        </Box>
+        {/* Box 2 and 3 */}
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          sx={{ width: { xs: "100%", md: "30%" } }}
+        >
+          <Grid container direction="column" spacing={2}>
+            <Grid item>
+              <Box sx={boxStyle}>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                  Exclude the Project Contigency
+                </Typography>
+                <FormGroup sx={formGroupStyle}>
+                  <FormControlLabel
+                    sx={checkStyle}
+                    control={<Checkbox />}
+                    label="Pre Constitution"
+                  />
+                  <FormControlLabel
+                    sx={checkStyle}
+                    control={<Checkbox />}
+                    label="General Conditions"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Retails Sales Tax"
+                  />
+                </FormGroup>
+              </Box>
+            </Grid>
 
-        <Box sx={{ mb: 2 }}>
-          <Typography sx={{ mb: 0.5, fontWeight: 500 }}>Notes</Typography>
-          <TextField
-            fullWidth
-            size="small"
-            placeholder="Additional notes"
-            variant="outlined"
-            value={notes}
-            onChange={(e) => setNotes(e.target.value)}
-            error={!!errors.notes}
-            helperText={errors.notes}
-          />
-        </Box>
+            <Grid item>
+              <Box sx={boxStyle}>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                  Exclude the Escalation Contigency
+                </Typography>
+                <FormGroup sx={formGroupStyle}>
+                  <FormControlLabel
+                    sx={checkStyle}
+                    control={<Checkbox />}
+                    label="Pre Constitution"
+                  />
+                  <FormControlLabel
+                    sx={checkStyle}
+                    control={<Checkbox />}
+                    label="General Conditions"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Retails Sales Tax"
+                  />
+                </FormGroup>
+              </Box>
+            </Grid>
+          </Grid>
+        </Grid>
 
-        <Button fullWidth variant="contained" onClick={handleSubmit}>
-          Submit
-        </Button>
-      </Paper>
+        {/* Box 4 and 5 */}
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          sx={{ width: { xs: "100%", md: "30%" } }}
+        >
+          <Grid container direction="column" spacing={2}>
+            <Grid item>
+              <Box sx={boxStyle}>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                  Exclude the Design Contigency
+                </Typography>
+                <FormGroup sx={formGroupStyle}>
+                  <FormControlLabel
+                    sx={checkStyle}
+                    control={<Checkbox />}
+                    label="Pre Constitution"
+                  />
+                  <FormControlLabel
+                    sx={checkStyle}
+                    control={<Checkbox />}
+                    label="General Conditions"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Retails Sales Tax"
+                  />
+                </FormGroup>
+              </Box>
+            </Grid>
+
+            <Grid item>
+              <Box sx={boxStyle}>
+                <Typography variant="h5" sx={{ mb: 2 }}>
+                  Bid Total Options
+                </Typography>
+                <FormGroup sx={formGroupStyle}>
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label="Exclude General Requirements from Direct Costs"
+                  />
+                </FormGroup>
+              </Box>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
