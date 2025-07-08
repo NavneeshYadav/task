@@ -301,10 +301,283 @@ function JobForm() {
                   </Button>
                 </Grid>
               </Grid>
+              <Grid
+                container
+                spacing={2}
+                sx={{ alignItems: "center", mt: { xs: 2 } }}
+              >
+                <Grid item xs={12}>
+                  <FormControl>
+                    <FormLabel id="demo-row-radio-buttons-group-label">
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Typography sx={{ mb: 0.5, color: "black" }}>
+                          Joint Venture Project
+                        </Typography>
+                      </Box>
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                    >
+                      <FormControlLabel
+                        value="yes"
+                        control={<Radio />}
+                        label="Yes"
+                      />
+                      <FormControlLabel
+                        value="no"
+                        control={<Radio />}
+                        label="No"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+              </Grid>
             </Box>
           </Box>
         </Grid>
       </Grid>
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          sx={{ width: { xs: "100%", md: "30%" } }}
+        >
+          <Box sx={{ mb: 2 }}>
+            <Typography sx={{ mb: 0.5, color: "black" }}>
+              Joint Venture Partner %
+            </Typography>
+            <TextField
+              fullWidth
+              size="small"
+              variant="outlined"
+              type="number"
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} sx={{ alignSelf: "end", mb: 2 }}>
+          <Button
+            variant="outlined"
+            endIcon={
+              <AttachFileIcon
+                sx={{
+                  transform: "rotate(45deg)",
+                }}
+              />
+            }
+            sx={{
+              textTransform: "none",
+              borderRadius: 2,
+            }}
+          >
+            Add JV Agreement
+          </Button>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2} sx={{ mt: 2 }}>
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          lg={3}
+          sx={{ width: { xs: "100%", md: "30%" } }}
+        >
+          <Box sx={{ mb: 2 }}>
+            <Typography sx={{ mb: 0.5, color: "black" }}>
+              Joint Venture Company
+            </Typography>
+            <TextField fullWidth size="small" variant="outlined" />
+          </Box>
+        </Grid>
+      </Grid>
+      <Box
+        sx={{
+          mt: 2,
+          mb: 2,
+          width: "100%",
+          height: "1px",
+          bgcolor: "grey",
+        }}
+      ></Box>
+      <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 2 }}>
+          <Typography variant="h5" sx={{ mb: 2, fontWeight: 550 }}>
+            L & P Insurance
+          </Typography>
+        </Box>
+        <Grid container spacing={8} sx={{ mt: 2 }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            sx={{ width: { xs: "100%", md: "30%" } }}
+          >
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 550 }}>
+              Performance Insurance
+            </Typography>
+            <Box sx={{ mb: 2 }}>
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography sx={{ mb: 0.5, color: "black" }}>
+                      Performance Applicable
+                    </Typography>
+                  </Box>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box sx={{ mb: { md: 2 } }}>
+              <Typography sx={{ mb: 0.5 }}>Rate %</Typography>
+              <TextField fullWidth size="small" variant="outlined" />
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            sx={{ width: { xs: "100%", md: "30%" } }}
+          >
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 550 }}>
+              Liability Insurance
+            </Typography>
+            <Box sx={{ mb: 2 }}>
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography sx={{ mb: 0.5, color: "black" }}>
+                      Liability Applicable
+                    </Typography>
+                  </Box>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box sx={{ mb: { md: 2 } }}>
+              <Typography sx={{ mb: 0.5 }}>Rate %</Typography>
+              <TextField fullWidth size="small" variant="outlined" />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
+      <Box sx={{ mb: 2 }}>
+        <Box sx={{ mb: 2 }}>
+          <Typography variant="h5" sx={{ mb: 2, fontWeight: 550 }}>
+            L & P Insurance
+          </Typography>
+        </Box>
+        <Grid container spacing={8} sx={{ mt: 2 }}>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            sx={{ width: { xs: "100%", md: "30%" } }}
+          >
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 550 }}>
+              Performance Insurance
+            </Typography>
+            <Box sx={{ mb: 2 }}>
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography sx={{ mb: 0.5, color: "black" }}>
+                      Performance Applicable
+                    </Typography>
+                  </Box>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box sx={{ mb: { md: 2 } }}>
+              <Typography sx={{ mb: 0.5 }}>Rate %</Typography>
+              <TextField fullWidth size="small" variant="outlined" />
+            </Box>
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={4}
+            lg={3}
+            sx={{ width: { xs: "100%", md: "30%" } }}
+          >
+            <Typography variant="h6" sx={{ mb: 2, fontWeight: 550 }}>
+              Liability Insurance
+            </Typography>
+            <Box sx={{ mb: 2 }}>
+              <FormControl>
+                <FormLabel id="demo-row-radio-buttons-group-label">
+                  <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Typography sx={{ mb: 0.5, color: "black" }}>
+                      Liability Applicable
+                    </Typography>
+                  </Box>
+                </FormLabel>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                >
+                  <FormControlLabel
+                    value="yes"
+                    control={<Radio />}
+                    label="Yes"
+                  />
+                  <FormControlLabel value="no" control={<Radio />} label="No" />
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box sx={{ mb: { md: 2 } }}>
+              <Typography sx={{ mb: 0.5 }}>Rate %</Typography>
+              <TextField fullWidth size="small" variant="outlined" />
+            </Box>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 }
