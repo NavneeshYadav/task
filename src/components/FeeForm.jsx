@@ -200,7 +200,11 @@ function FeeForm() {
           spacing={2}
           sx={{ width: "100%", justifyContent: { sm: "flex-end" }, mt: 2 }}
         >
-          <Button variant="outlined" color="primary" sx={{ border: "2px solid #1976d2" }}>
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ border: "2px solid #1976d2" }}
+          >
             Save
           </Button>
           <Button variant="contained" color="primary">

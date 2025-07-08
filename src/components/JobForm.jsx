@@ -8,6 +8,7 @@ import {
   Paper,
   Grid,
   MenuItem,
+  Stack,
 } from "@mui/material";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -16,6 +17,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 function JobForm() {
   return (
     <Box sx={{ width: "100%", height: "100%", p: 1 }}>
@@ -80,9 +82,9 @@ function JobForm() {
               Construction Type
             </Typography>
             <TextField fullWidth select size="small">
-              <MenuItem value="">Select Representative</MenuItem>
-              <MenuItem value="rep1">Representative 1</MenuItem>
-              <MenuItem value="rep2">Representative 2</MenuItem>
+              <MenuItem value="">Select Type</MenuItem>
+              <MenuItem value="rep1">Type 1</MenuItem>
+              <MenuItem value="rep2">Type 2</MenuItem>
             </TextField>
           </Box>
         </Grid>
@@ -99,9 +101,9 @@ function JobForm() {
               Contract Type
             </Typography>
             <TextField fullWidth select size="small">
-              <MenuItem value="">Select Representative</MenuItem>
-              <MenuItem value="rep1">Representative 1</MenuItem>
-              <MenuItem value="rep2">Representative 2</MenuItem>
+              <MenuItem value="">Select Type</MenuItem>
+              <MenuItem value="rep1">Type 1</MenuItem>
+              <MenuItem value="rep2">Type 2</MenuItem>
             </TextField>
           </Box>
         </Grid>
@@ -118,9 +120,9 @@ function JobForm() {
               Square Foot
             </Typography>
             <TextField fullWidth select size="small">
-              <MenuItem value="">Select Representative</MenuItem>
-              <MenuItem value="rep1">Representative 1</MenuItem>
-              <MenuItem value="rep2">Representative 2</MenuItem>
+              <MenuItem value="">Select Feet</MenuItem>
+              <MenuItem value="rep1">Feet 1</MenuItem>
+              <MenuItem value="rep2">Feet 2</MenuItem>
             </TextField>
           </Box>
         </Grid>
@@ -139,9 +141,9 @@ function JobForm() {
               Vertical Market Type
             </Typography>
             <TextField fullWidth select size="small">
-              <MenuItem value="">Select Representative</MenuItem>
-              <MenuItem value="rep1">Representative 1</MenuItem>
-              <MenuItem value="rep2">Representative 2</MenuItem>
+              <MenuItem value="">Select Type</MenuItem>
+              <MenuItem value="rep1">Type 1</MenuItem>
+              <MenuItem value="rep2">Type 2</MenuItem>
             </TextField>
           </Box>
         </Grid>
@@ -176,9 +178,9 @@ function JobForm() {
           <Box sx={{ mb: 2 }}>
             <Typography sx={{ mb: 0.5, fontWeight: 550 }}>Bid Type</Typography>
             <TextField fullWidth select size="small">
-              <MenuItem value="">Select Representative</MenuItem>
-              <MenuItem value="rep1">Representative 1</MenuItem>
-              <MenuItem value="rep2">Representative 2</MenuItem>
+              <MenuItem value="">Select Type</MenuItem>
+              <MenuItem value="rep1">Type 1</MenuItem>
+              <MenuItem value="rep2">Type 2</MenuItem>
             </TextField>
           </Box>
         </Grid>
@@ -773,6 +775,32 @@ function JobForm() {
             </FormControl>
           </Grid>
         </Grid>
+      </Box>
+      <Box
+        sx={{
+          mt: 4,
+          display: "flex",
+          backgroundColor: "#ebebeb",
+          alignItems: "center",
+          p: 3,
+        }}
+      >
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          spacing={2}
+          sx={{ width: "100%", justifyContent: { sm: "flex-end" } }}
+        >
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ border: "2px solid #1976d2" }}
+          >
+            Save
+          </Button>
+          <Button variant="contained" color="primary">
+            Next <ArrowRightAltIcon sx={{ ml: 1 }} />
+          </Button>
+        </Stack>
       </Box>
     </Box>
   );
